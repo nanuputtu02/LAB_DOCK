@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIAL = "docker"
-        IMAGE_NAME = "nandan02/madam"
+        DOCKER_CREDENTIAL_ID = "docker"
+        IMAGE_NAME = "nandan02/docker_image"
     }
 
     stages {
@@ -33,7 +33,7 @@ pipeline {
                     usernameVariable: "USER",
                     passwordVariable: "PASS"
                 )]) {
-                    bat 'echo %PASS% | docker login -u %USER% --password-stdin'
+                    bat "echo %PASS% | docker login -u %USER% --password-stdin"
                 }
             }
         }
@@ -42,6 +42,12 @@ pipeline {
             steps {
                 bat "docker push %IMAGE_NAME%:latest"
             }
+        }
+    }
+
+    post {
+        always {
+            bat "docker logout"
         }
     }
 }
