@@ -40,7 +40,7 @@ pipeline {
                     passwordVariable: "PASS"
                 )]) {
                     // SAFE + WORKING Windows Jenkins login
-                    bat "echo %PASS% | docker login -u %USER% --password-stdin"
+                    bat "echo %PASS%| docker login -u %USER% --password-stdin"
                 }
             }
         }
