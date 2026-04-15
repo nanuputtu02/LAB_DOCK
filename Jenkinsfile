@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIAL_ID = "docker"
-        IMAGE_NAME = "nandan02/docker_image"
+        IMAGE_NAME = "nandan02/madam"
     }
 
     stages {
