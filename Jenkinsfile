@@ -27,16 +27,17 @@ pipeline {
         }
 
         stage('Login to DockerHub') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: "docker",
-                    usernameVariable: "USER",
-                    passwordVariable: "PASS"
-                )]) {
-                    bat "echo %PASS% | docker login -u %USER% --password-stdin"
-                }
-            }
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: "docker",
+            usernameVariable: "USER",
+            passwordVariable: "PASS"
+        )]) {
+            bat "docker login -u %USER% --password-stdin <nul"
+            bat "echo %PASS% | docker login -u %USER% --password-stdin"
         }
+    }
+}
 
         stage('Push Docker Image') {
             steps {
